@@ -2,6 +2,7 @@ package bd
 
 import (
 	"context"
+	"fmt"
 	"time"
 
 	"go.mongodb.org/mongo-driver/bson"
@@ -15,7 +16,7 @@ func CheckExistUser(email string) (models.User, bool, string) {
 	defer cancel()
 
 	db := MongoCN.Database("twitter")
-	col := db.Collection("users")
+	col := db.Collection("Users")
 
 	condition := bson.M{"email": email}
 
@@ -24,6 +25,7 @@ func CheckExistUser(email string) (models.User, bool, string) {
 	err := col.FindOne(ctx, condition).Decode(&result)
 	ID := result.ID.Hex()
 	if err != nil {
+		fmt.Println("No lo encontro")
 		return result, false, ID
 	}
 

@@ -1,7 +1,7 @@
 package routers
 
 import (
-	"enconding/json"
+	"encoding/json"
 	"net/http"
 	"time"
 
@@ -17,7 +17,7 @@ func Login(writer http.ResponseWriter, request *http.Request) {
 
 	err := json.NewDecoder(request.Body).Decode(&user)
 	if err != nil {
-		http.Error(writer, "Usuario y/o contraseña invalidos"+err.Error(), 400)
+		http.Error(writer, "Usuario y/o contraseña invalidos 1"+err.Error(), 400)
 		return
 	}
 
@@ -28,11 +28,11 @@ func Login(writer http.ResponseWriter, request *http.Request) {
 
 	document, exist := bd.TryLogin(user.Email, user.Password)
 	if exist == false {
-		http.Error(writer, "Usuario y/o contraseña invalidos", 400)
+		http.Error(writer, "Usuario y/o contraseña invalidos 2", 400)
 		return
 	}
 
-	jwtKey, err := jwt.GeratedJWT(document)
+	jwtKey, err := jwt.GeneratedJWT(document)
 	if err != nil {
 		http.Error(writer, "Ocurrio un error al intentar general el token correspondiente "+err.Error(), 400)
 		return

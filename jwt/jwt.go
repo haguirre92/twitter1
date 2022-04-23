@@ -7,7 +7,7 @@ import (
 	"github.com/haguirre92/twitter1/models"
 )
 
-func GeneroJWT(user models.User) (string, error) {
+func GeneratedJWT(user models.User) (string, error) {
 
 	myKey := []byte("laclavemas_Tesaquemehecreado")
 	payload := jwt.MapClaims{
