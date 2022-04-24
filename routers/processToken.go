@@ -2,7 +2,6 @@ package routers
 
 import (
 	"errors"
-	"strings"
 
 	jwt "github.com/dgrijalva/jwt-go"
 	"github.com/haguirre92/twitter1/bd"
@@ -16,11 +15,12 @@ func ProcessToken(token string) (*models.Claim, bool, string, error) {
 	myKey := []byte("laclavemas_Tesaquemehecreado")
 
 	claims := &models.Claim{}
-	splitToken := strings.Split(token, "Bearer")
+	/* Se comenta debido a que no es necesario realizar el split en el token. Se deja como conosimiento gral
+	splitToken := strings.Split(token, "ey")
 	if len(splitToken) != 2 {
 		return claims, false, string(""), errors.New("Formato de token invalido")
 	}
-	token = strings.TrimSpace(splitToken[1])
+	token = strings.TrimSpace(splitToken[1])*/
 
 	tkn, err := jwt.ParseWithClaims(token, claims, func(t *jwt.Token) (interface{}, error) {
 		return myKey, nil
