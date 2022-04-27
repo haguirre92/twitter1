@@ -2,6 +2,7 @@ package routers
 
 import (
 	"errors"
+	"log"
 
 	jwt "github.com/dgrijalva/jwt-go"
 	"github.com/haguirre92/twitter1/bd"
@@ -15,6 +16,7 @@ func ProcessToken(token string) (*models.Claim, bool, string, error) {
 	myKey := []byte("laclavemas_Tesaquemehecreado")
 
 	claims := &models.Claim{}
+
 	/* Se comenta debido a que no es necesario realizar el split en el token. Se deja como conosimiento gral
 	splitToken := strings.Split(token, "ey")
 	if len(splitToken) != 2 {
@@ -26,10 +28,12 @@ func ProcessToken(token string) (*models.Claim, bool, string, error) {
 		return myKey, nil
 	})
 	if err != nil {
+		log.Println("Paso por aca")
 		_, find, _ := bd.CheckExistUser(claims.Email)
 		if find == true {
 			Email = claims.Email
 			IDUsuario = claims.ID.Hex()
+			log.Println("Luego por aca: ", IDUsuario)
 		}
 		return claims, find, IDUsuario, nil
 	}
