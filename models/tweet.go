@@ -1,5 +1,5 @@
 package models
 
 type Tweet struct {
-	Message string `json:"message" json:"message, omitempty"`
+	Message string `bson:"message" json:"message, omitempty"`
 }
